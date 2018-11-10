@@ -1,0 +1,95 @@
+master _ error _ R
+master 1 place_initial_border_1 _ R
+place_initial_border_1 1 place_initial_border_2 _ R
+place_initial_border_1 _ error _ N
+place_initial_border_2 1 skip_argument E R
+place_initial_border_2 _ const_one_1 1 R
+const_one_1 _ end_alg 1 L
+skip_argument 1 skip_argument 1 R
+skip_argument _ place_separator _ N
+
+place_separator _ def_1 S R
+
+def_1 _ def_2 1 R
+def_2 _ def_3 1 R
+def_3 _ def_4 U R
+def_4 _ def_5 1 R
+def_5 _ def_6 1 R
+def_6 _ def_7 P L
+def_7 1 def_8 1 L
+def_8 1 def_9 1 L
+def_9 U def_a U L
+def_a 1 def_b 1 L
+def_b 1 begin_alg 1 L
+
+begin_alg S check_arg S L
+
+check_arg E cleanup _ R
+check_arg 1 rem_arg_1 1 N
+
+rem_arg_1 1 rem_arg_1 1 L
+rem_arg_1 E rem_arg_2 _ R
+rem_arg_2 1 rem_arg_3 E R
+rem_arg_3 1 rem_arg_3 1 R
+rem_arg_3 S begin_addition S N
+
+begin_addition S place_t_and_go S R
+
+place_t_and_go 1 place_t_and_go_1 t R
+place_t_and_go_1 1 place_t_and_go_1 1 R
+place_t_and_go_1 U place_t_and_go_1 U R
+place_t_and_go_1 P place_t_and_go_1 P R
+place_t_and_go_1 _ return_to_t 1 L
+
+return_to_t 1 return_to_t 1 L
+return_to_t P return_to_t P L
+return_to_t U return_to_t U L
+return_to_t t check_right_is_U t R
+
+check_right_is_U 1 place_t_and_go 1 N
+check_right_is_U U place_end_p U R
+
+place_end_p 1 place_end_p 1 R
+place_end_p U place_end_p U R
+place_end_p P place_end_p P R
+place_end_p _ get_to_U P L
+
+get_to_U 1 get_to_U 1 L
+get_to_U P get_to_U P L
+get_to_U U t_to_1_convert U L
+
+t_to_1_convert t t_to_1_convert 1 L
+t_to_1_convert S combining S N
+
+combining S combine_to_U S R
+
+combine_to_U 1 combine_to_U 1 R
+combine_to_U U combine_to_P 1 R
+combine_to_P 1 combine_to_P 1 R
+combine_to_P P minus_two_1 m L
+minus_two_1 1 minus_two_2 m L
+minus_two_2 1 replace_m_and_go_1 U R
+replace_m_and_go_1 m replace_m_and_go_2 1 R
+replace_m_and_go_2 m replace_m_and_go_2 m R
+replace_m_and_go_2 1 replace_m_and_go_a m R
+replace_m_and_go_a 1 replace_m_and_go_3 1 L
+replace_m_and_go_3 m replace_m_and_go_3 m L
+replace_m_and_go_3 1 replace_m_and_go_1 1 R
+
+replace_m_and_go_a P erase_back _ L
+erase_back m erase_back _ L
+erase_back 1 put_final_P 1 R
+put_final_P _ return_to_begining P L
+return_to_begining 1 return_to_begining 1 L
+return_to_begining U return_to_begining U L
+return_to_begining S cycle_done S N
+cycle_done S begin_alg S N
+
+cleanup S cleanup S R
+cleanup 1 cleanup 1 R
+cleanup U cleanup U R
+cleanup P cleanup_1 _ L
+cleanup_1 1 cleanup_1 _ L
+cleanup_1 U repos _ L
+repos 1 repos 1 L
+repos S end_alg _ R
